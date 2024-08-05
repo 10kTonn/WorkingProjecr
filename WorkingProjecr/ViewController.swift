@@ -23,6 +23,8 @@ class ViewController: UIViewController {
         stringTask()
         print("Enum:")
         enumTask()
+        print("Class:")
+        classTask()
     }
     // MARK: - Optional
     func optionalTask() {
@@ -219,41 +221,87 @@ class ViewController: UIViewController {
             case pizza(count: Int, isAvailable: Bool = Bool.random())
             
             func printMenu() {
-                    switch self{
-                    case .cola(let volume, let flag):
-                        if flag == false {
-                            print("Извините, нет в наличии")
-                            break
-                        }
-                        print("Заказали колу \(volume) грамм")
-                    case .potato(let volume, let flag):
-                        if flag == false {
-                            print("Извините, нет в наличии")
-                            break
-                        }
-                        print("Заказали картошку \(volume) грамм")
-                    case .salat(let volume, let flag):
-                        if flag == false {
-                            print("Извините, нет в наличии")
-                            break
-                        }
-                        print("Заказали салат \(volume) грамм")
-                    case .burger(let volume, let flag):
-                        if flag == false {
-                            print("Извините, нет в наличии")
-                            break
-                        }
-                        print("Заказали бургер \(volume) штук")
-                    case .pizza(let volume, let flag):
-                        if flag == false {
-                            print("Извините, нет в наличии")
-                            break
-                        }
-                        print("Заказали пиццу \(volume) штук")
+                switch self{
+                case .cola(let volume, let flag):
+                    if flag == false {
+                        print("Извините, нет в наличии")
+                        break
+                    }
+                    print("Заказали колу \(volume) грамм")
+                case .potato(let volume, let flag):
+                    if flag == false {
+                        print("Извините, нет в наличии")
+                        break
+                    }
+                    print("Заказали картошку \(volume) грамм")
+                case .salat(let volume, let flag):
+                    if flag == false {
+                        print("Извините, нет в наличии")
+                        break
+                    }
+                    print("Заказали салат \(volume) грамм")
+                case .burger(let volume, let flag):
+                    if flag == false {
+                        print("Извините, нет в наличии")
+                        break
+                    }
+                    print("Заказали бургер \(volume) штук")
+                case .pizza(let volume, let flag):
+                    if flag == false {
+                        print("Извините, нет в наличии")
+                        break
+                    }
+                    print("Заказали пиццу \(volume) штук")
                 }
             }
         }
         var order: [MenuRestaraunt] = [.cola(volume: 100), .burger(count: 3), .pizza(count: 1)]
         order.forEach({$0.printMenu()})
+    }
+    
+    //MARK: Class and Struct
+    func classTask() {
+        class Employee {
+            var firstName: String
+            var lastName: String
+            var isWork: Bool
+            
+            init(firstName: String, lastName: String, isWork: Bool) {
+                self.firstName = firstName
+                self.lastName = lastName
+                self.isWork = isWork
+            }
+        }
+        
+        let employes = [Employee(firstName: "Bob", lastName: "Been", isWork: Bool.random()),
+                        Employee(firstName: "Andy", lastName: "Pitta", isWork: Bool.random()),
+                        Employee(firstName: "Igor", lastName: "Kita", isWork: Bool.random()),
+                        Employee(firstName: "Andry", lastName: "Lrlrl", isWork: Bool.random()),
+                        Employee(firstName: "Sam", lastName: "Orfon", isWork: Bool.random())]
+     
+        // Это функция сортировки, по моему это какоето говно я придумал, но вроде работает
+        func sortEmployes(arg: [Employee]) -> [Employee] {
+            var trueArr: [Employee] = []
+            var falseArg: [Employee] = []
+            arg.forEach({
+                if $0.isWork == true{
+                    trueArr.append($0)
+                } else {
+                    falseArg.append($0)
+                }
+            })
+            let trueResult = trueArr.sorted {(a, b) -> Bool in
+                return a.lastName < b.lastName
+            }
+            let falseResut = falseArg.sorted {(a, b) -> Bool in
+                return a.firstName < b.firstName
+            }
+            return trueResult + falseResut
+        }
+        
+        let newArrEmployes = sortEmployes(arg: employes)
+        newArrEmployes.forEach({
+            print($0.firstName, $0.lastName, $0.isWork)
+        })
     }
 }
