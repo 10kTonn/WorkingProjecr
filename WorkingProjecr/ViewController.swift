@@ -76,10 +76,9 @@ class ViewController: UIViewController {
     
     // MARK: - Array
     func arrayTask() {
-        var intRandomArray = [Int]()
-        for _ in 0...9 {
-            intRandomArray.append(Int.random(in: 1...50))
-        }
+        var intRandomArray = (0...9).map{_ in 
+            Int.random(in: 0...50)}
+
         intRandomArray.forEach {number in
             print(number)
         }
