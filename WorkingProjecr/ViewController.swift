@@ -63,7 +63,7 @@ class ViewController: UIViewController {
         })
         
         func getOlderPerson(firstPerson: (PersonInfo),
-                        secondPerson: (PersonInfo)) -> (PersonInfo){
+                            secondPerson: (PersonInfo)) -> (PersonInfo){
             if firstPerson.age > secondPerson.age {
                 return firstPerson
             } else {
@@ -170,7 +170,7 @@ class ViewController: UIViewController {
             array.forEach({
                 if $0.count > resultString.count {resultString = $0}
             })
-           return resultString
+            return resultString
         }
         let maxlenthString = maxLenthStringInArray(array: arrayString)
         print(maxlenthString)
@@ -271,30 +271,32 @@ class ViewController: UIViewController {
                         Employee(firstName: "Igr", lastName: "Kia", isWork: Bool.random()),
                         Employee(firstName: "Adr", lastName: "Lrl", isWork: Bool.random()),
                         Employee(firstName: "Sam", lastName: "Orn", isWork: Bool.random())]
-     
-        // Это функция сортировки, по моему это какоето говно я придумал, но вроде работает
-        func sortEmployes(arg: [Employee]) -> [Employee] {
-            var trueArr = [Employee]()
-            var falseArg = [Employee]()
-            arg.forEach({
-                if $0.isWork == true{
-                    trueArr.append($0)
-                } else {
-                    falseArg.append($0)
-                }
-            })
-            let trueResult = trueArr.sorted {(a, b) -> Bool in
-                return a.lastName < b.lastName
-            }
-            let falseResut = falseArg.sorted {(a, b) -> Bool in
-                return a.firstName < b.firstName
-            }
-            return trueResult + falseResut
-        }
         
-        let newArrEmployes = sortEmployes(arg: employes)
-        newArrEmployes.forEach({
-            print($0.firstName, $0.lastName, $0.isWork)
-        })
+        // Это функция сортировки, по моему это какоето говно я придумал, но вроде работает
+            func sortEmployes(arg: [Employee]) -> [Employee] {
+                var trueArr: [Employee] = []
+                var falseArg: [Employee] = []
+                
+                arg.forEach({
+                    if $0.isWork == true{
+                        trueArr.append($0)
+                    } else {
+                        falseArg.append($0)
+                    }
+                })
+                let trueResult = trueArr.sorted {(a, b) -> Bool in
+                    return a.lastName < b.lastName
+                }
+                let falseResut = falseArg.sorted {(a, b) -> Bool in
+                    return a.firstName < b.firstName
+                }
+                return trueResult + falseResut
+            }
+            
+            let newArrEmployes = sortEmployes(arg: employes)
+            newArrEmployes.forEach({
+                print($0.firstName, $0.lastName, $0.isWork)
+            })
+        }
     }
-}
+
