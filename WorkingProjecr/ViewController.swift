@@ -297,6 +297,18 @@ class ViewController: UIViewController {
             newArrEmployes.forEach({
                 print($0.firstName, $0.lastName, $0.isWork)
             })
+            let trueResult = trueArr.sorted {(a, b) -> Bool in
+                return a.lastName < b.lastName
+            }
+            let falseResut = falseArg.sorted {(a, b) -> Bool in
+                return a.firstName < b.firstName
+            }
+            return trueResult + falseResut
         }
+        
+        let newArrEmployes = sortEmployes(arg: employes)
+        newArrEmployes.forEach({
+            print($0.firstName, $0.lastName, $0.isWork)
+        })
     }
 
